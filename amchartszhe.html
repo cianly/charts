@@ -1,0 +1,54 @@
+<html>  
+  <head>  
+    <title>amcharts</title>  
+      
+    <!-- 导入Amcharts js 库 -->  
+    <!-- Resources -->
+<script src="amcharts/amcharts.js"></script>
+<script src="amcharts/serial.js"></script>
+<script src="amcharts/export.min.js"></script>
+<link rel="stylesheet" href="amcharts/export.css" type="text/css" media="all" />
+<script src="amcharts/light.js"></script>
+    <script>      
+        var fun1 = function(){  
+            var chartData = [{ country: "USA", visits: 252 },  
+                    { country: "China", visits: 382 },  
+                    { country: "Japan", visits: 209 },  
+                    { country: "Germany", visits: 322 },  
+                    { country: "UK", visits: 122 },  
+                    ];  
+              
+            //AmSerialChart 类  
+            var chart = new AmCharts.AmSerialChart();  
+            chart.dataProvider = chartData;     //指定数据源  
+            chart.categoryField = "country";    //数据的分类  
+              
+            //创建  
+            var graph = new AmCharts.AmGraph();  
+            graph.valueField = "visits";    //数值字段名称  
+            graph.type = "line";          //列名称  后面代码是折线面积图graph.type = "line";
+            graph.fillAlphas = 0.5;
+            chart.addGraph(graph);  
+            graph.fillAlphas = 0.8;//填充柱形图的颜色
+            // chart.angle = 30;
+            // chart.depth3D = 15;//控制列的深度和角度
+            graph.balloonText = "[[category]]: <b>[[value]]</b>";//在数值前面加上国家名
+            graph.fillAlphas = 0; // 或者删除这一行, 因为0是默认值
+            graph.bullet = "round";
+            graph.lineColor = "#8d1cc6";
+
+            var categoryAxis = chart.categoryAxis;
+            categoryAxis.autoGridCount  = false;//设置为false，否则gridount属性会被忽略。
+            categoryAxis.gridCount = chartData.length;
+            categoryAxis.gridPosition = "start";
+            categoryAxis.labelRotation = 90;//图形下面的文字旋转90度。
+
+            chart.write(document.getElementById("chartContainer")); //write 到 div 中  
+        }  
+    </script>  
+  </head>  
+    
+  <body onload="fun1()">  
+    <div id="chartContainer" style="width: 240px; height: 200px;"></div>  
+  </body>  
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>折线图</title>	
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<script type="text/javascript" src="highcharts/jquery.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script> -->
+
+        <script src="highcharts/highcharts.js"></script>
+
+        <script src="highcharts/exporting.js"></script>
+
+        <!-- <script src="highcharts-zh_CN.js"></script> -->
+        <style>
+            body{
+                background-color: #000;
+            }
+        </style>
+<body>
+	<div id="main" style="width:250px;height:200px;background-color: #000;"></div>
+</body>
+<script>
+$(function () {
+    var colors = ['#3123AE', '#53D0FC',];  
+             Highcharts.getOptions().colors = Highcharts.map(colors, function (color) {  
+                 return {  
+                     radialGradient: { cx: 0, cy: 0.8, r: 2.3 },  
+                     stops: [[0, color], [2, Highcharts.Color(color).brighten(14).get('rgb')] // darken   
+                     ]  
+                 };  
+             });
+    $('#main').highcharts({
+        credits: {  
+        enabled:false  
+    },
+    plotOptions:{  
+        column:{  
+            borderColor: "",//去边框  
+            shadow: false       //去阴影  
+        }  
+    },
+    exporting:{  
+        enabled:false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示  
+        }, 
+        chart: {
+            type: 'column',
+            backgroundColor:'rgba(0,0,0,0)',  
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    color: '#fff',
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '来源数量（个）',
+                style: {
+                    color:"#fff"
+                }
+            },
+            labels: {
+                // rotation: -45,
+                style: {
+                    color: '#fff',
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '数量: <b>{point.y:.1f} </b>'
+        },
+        series: [{
+            name: '总数量',
+            data: [
+                ['联通', 124],
+                ['垂直网站', 250],
+                ['门店自留', 351],
+                ['营销活动', 178],
+            ],
+            dataLabels: {
+                enabled: false,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+
+
+</script>
+</html>

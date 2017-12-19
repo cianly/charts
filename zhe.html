@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>折线图</title>	
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<script type="text/javascript" src="highcharts/jquery.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script> -->
+
+        <script src="highcharts/highcharts.js"></script>
+
+        <script src="highcharts/exporting.js"></script>
+
+        <!-- <script src="highcharts-zh_CN.js"></script> -->
+        <style>
+            body{
+                background-color: #000;
+            }
+          /*  .highcharts-series-0{
+                display: none;
+            }*/
+        </style>
+<body>
+	<div id="container" style="width:250px;height:200px"></div>
+</body>
+<script>
+	$(function () {
+        var colors = ['#3123AE'];  
+             Highcharts.getOptions().colors = Highcharts.map(colors, function (color) {  
+                 return {  
+                     radialGradient: { cx: 0, cy: 0.8, r: 2.3 },  
+                     stops: [[0, color], [2, Highcharts.Color(color).brighten(14).get('rgb')] // darken   
+                     ]  
+                 };  
+             });
+        $('#container').highcharts({
+        	credits: {  
+            enabled:false  
+        },
+        exporting:{  
+    		enabled:false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示  
+    		}, 
+            chart: {
+                type: 'line',
+                backgroundColor:'rgba(0,0,0,0)',  
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                title: {
+                    text: '天数',
+                    style: {
+                        color:"#fff"
+                    }
+                },
+                labels: {
+                    // rotation: -45,
+                    style: {
+                        color: '#fff',
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                },
+                categories: ['一', '二', '三', '四', '五', '六', '七']
+            },
+            yAxis: {
+                title: {
+                    text: '评分',
+                    style: {
+                        color:"#fff"
+                    }
+                },
+                labels: {
+                    // rotation: -45,
+                    style: {
+                        color: '#fff',
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: false          // 开启数据标签
+                    },
+                    enableMouseTracking: true // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+                }
+            },
+            series: [{
+
+
+                name: null,
+                
+                data: [50, 72, 82, 91, 69, 48, 65],
+                dataLabels: {
+                    enabled: false,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:.1f}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            }
+
+            // {
+            //    name: '伦敦',
+            //     data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2]
+            // }
+            ],
+            legend: {
+                enabled: false
+                }, 
+        });
+});
+
+</script>
+</html>
